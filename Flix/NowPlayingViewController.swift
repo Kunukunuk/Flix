@@ -32,7 +32,6 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         tableView.rowHeight = 180
         
         fetchMovies()
-        activity.stopAnimating()
     }
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
@@ -86,6 +85,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
                 self.movies = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
+                self.activity.stopAnimating()
                 
             }
         }
