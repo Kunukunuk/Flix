@@ -40,8 +40,13 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        /*if searchText == "" {
+            isSearching = false
+            tableView.reloadData()
+        }
+        isSearching = true*/
         filteredData = movies.filter {
-             ($0["title"] as! String).contains(searchText)
+             ($0["title"] as! String).lowercased().contains(searchText.lowercased())
         }
         
         tableView.reloadData()
