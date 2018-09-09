@@ -30,7 +30,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         searchBar.delegate = self
 
         tableView.dataSource = self
-        tableView.rowHeight = 180
+        //tableView.rowHeight = 180
         
         fetchMovies()
     }
