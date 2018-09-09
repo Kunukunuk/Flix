@@ -17,6 +17,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
+    var isSearching: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,29 +36,28 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     }
     
     @objc func didPullToRefresh(_ refreshControl: UIRefreshControl) {
-        
         fetchMovies()
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredData = movies
-        for movie in filteredData {
-            let title = movie["title"] as! String
-            if title.range(of: searchText) != nil {
-                print(title)
-            }
+        filteredData = movies.filter {
+             ($0["title"] as! String).contains(searchText)
         }
+        
         tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
+        isSearching = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
         searchBar.text = ""
         searchBar.resignFirstResponder()
+        isSearching = false
+        tableView.reloadData()
     }
     
     
@@ -86,6 +86,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
                 self.activity.stopAnimating()
+                self.filteredData = self.movies
                 
             }
         }
@@ -93,13 +94,22 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (isSearching) {
+            return filteredData.count
+        }
         return movies.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        let movie = movies[indexPath.row]
+        
+        let movie: [String: Any]
+        if isSearching {
+            movie = filteredData[indexPath.row]
+        } else {
+            movie = movies[indexPath.row]
+        }
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
         
