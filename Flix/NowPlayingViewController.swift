@@ -67,7 +67,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     
     func alert() {
         let alertController = UIAlertController(title: "Can not get the movies", message: "The internet connection appears to be offline", preferredStyle: .alert)
-        let OKAction = UIAlertAction(title: "OK", style: .default, handler: {UIAlertAction in self.fetchMovies()})
+        let OKAction = UIAlertAction(title: "Try Again", style: .default, handler: {UIAlertAction in self.fetchMovies()})
         alertController.addAction(OKAction)
         tableView.addSubview(alertController.view)
         present(alertController, animated: true)
@@ -120,6 +120,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
+        //let placeholderURL = URL(string: "https://httpbin.org/image/png")!
+        //let placeholderImg = UIImage(named: "placeholder")
+        //cell.moviePosterImage.af_setImage(withURL: placeholderURL, placeholderImage: placeholderImg)
         /*
          let url = URL(string: "https://httpbin.org/image/png")!
          let placeholderImage = UIImage(named: "placeholder")!
