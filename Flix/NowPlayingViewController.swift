@@ -30,7 +30,6 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         searchBar.delegate = self
 
         tableView.dataSource = self
-        //tableView.rowHeight = 180
         
         fetchMovies()
     }
@@ -40,21 +39,21 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        /*if searchText == "" {
+        if searchText == "" {
             isSearching = false
             tableView.reloadData()
+        } else {
+            isSearching = true
+            filteredData = movies.filter {
+                 ($0["title"] as! String).lowercased().contains(searchText.lowercased())
+            }
+            
+            tableView.reloadData()
         }
-        isSearching = true*/
-        filteredData = movies.filter {
-             ($0["title"] as! String).lowercased().contains(searchText.lowercased())
-        }
-        
-        tableView.reloadData()
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
-        isSearching = true
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -121,6 +120,22 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
+        /*
+         let url = URL(string: "https://httpbin.org/image/png")!
+         let placeholderImage = UIImage(named: "placeholder")!
+         
+         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+         size: imageView.frame.size,
+         radius: 20.0
+         )
+         
+         imageView.af_setImage(
+         withURL: url,
+         placeholderImage: placeholderImage,
+         filter: filter,
+         imageTransition: .crossDissolve(0.2)
+         )
+        */
         let posterPathString = movie["poster_path"] as! String
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         
