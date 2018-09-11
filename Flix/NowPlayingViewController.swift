@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
     var movies: [[String: Any]] = []
@@ -22,6 +22,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        tableView.delegate = self
         activity.startAnimating()
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
@@ -104,6 +105,33 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         return movies.count
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! MovieDetailsViewController
+        //let movie = movies[indexPath.row]
+        if let indexPath = tableView.indexPathForSelectedRow {
+            let movie = movies[indexPath[1]]
+        
+            let title = movie["title"] as! String
+            let overview = movie["overview"] as! String
+        
+            destinationVC.mtitle = title
+            destinationVC.overview = overview
+            
+            let posterPathString = movie["poster_path"] as! String
+            let backdropPathString = movie["backdrop_path"] as! String
+            let baseURLString = "https://image.tmdb.org/t/p/w500"
+            
+            destinationVC.backdropURL = baseURLString + backdropPathString
+            destinationVC.posterURL = baseURLString + posterPathString
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "GoToMovie", sender: self)
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
@@ -120,25 +148,21 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
-        //let placeholderURL = URL(string: "https://httpbin.org/image/png")!
-        //let placeholderImg = UIImage(named: "placeholder")
-        //cell.moviePosterImage.af_setImage(withURL: placeholderURL, placeholderImage: placeholderImg)
-        /*
-         let url = URL(string: "https://httpbin.org/image/png")!
-         let placeholderImage = UIImage(named: "placeholder")!
-         
-         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-         size: imageView.frame.size,
-         radius: 20.0
-         )
-         
-         imageView.af_setImage(
-         withURL: url,
-         placeholderImage: placeholderImage,
-         filter: filter,
-         imageTransition: .crossDissolve(0.2)
-         )
-        */
+        let placeholderURL = URL(string: "https://httpbin.org/image/png")!
+        let placeholderImg = UIImage(named: "placeholder")
+        
+        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
+            size: cell.moviePosterImage.frame.size,
+            radius: 20.0
+        )
+        
+        cell.moviePosterImage.af_setImage(
+            withURL: placeholderURL,
+            placeholderImage: placeholderImg,
+            filter: filter,
+            imageTransition: .crossDissolve(0.2)
+        )
+        
         let posterPathString = movie["poster_path"] as! String
         let baseURLString = "https://image.tmdb.org/t/p/w500"
         
