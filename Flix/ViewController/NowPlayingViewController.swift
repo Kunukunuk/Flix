@@ -106,30 +106,12 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destinationVC = segue.destination as! MovieDetailsViewController
-        //let movie = movies[indexPath.row]
-        if let indexPath = tableView.indexPathForSelectedRow {
-            let movie = movies[indexPath[1]]
-        
-            let title = movie["title"] as! String
-            let overview = movie["overview"] as! String
-        
-            destinationVC.mtitle = title
-            destinationVC.overview = overview
-            
-            let posterPathString = movie["poster_path"] as! String
-            let backdropPathString = movie["backdrop_path"] as! String
-            let baseURLString = "https://image.tmdb.org/t/p/w500"
-            
-            destinationVC.backdropURL = baseURLString + backdropPathString
-            destinationVC.posterURL = baseURLString + posterPathString
+        let cell = sender as! UITableViewCell
+        if let indexPath = tableView.indexPath(for: cell) {
+            let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailsViewController
+            detailViewController.movie = movie
         }
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "GoToMovie", sender: self)
-        
-        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
