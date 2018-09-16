@@ -20,12 +20,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var releaseDatelabel: UILabel!
     @IBOutlet weak var overviewLabel: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     
     var movie: [String: Any]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+50)
+        
         if let movie = movie {
             titleLabel.text = movie[MovieKey.title] as? String
             releaseDatelabel.text = movie["release_date"] as? String
