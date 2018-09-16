@@ -66,6 +66,13 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
+                for movie in movies {
+                    let action = movie["genre_ids"]! as! NSArray
+                    if action.contains(28) {
+                        //print(movie["title"])
+                    }
+                
+                }
                 self.movies = movies
                 self.collectionView.reloadData()
                 //self.refreshControl.endRefreshing()
