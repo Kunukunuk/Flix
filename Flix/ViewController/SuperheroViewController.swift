@@ -22,7 +22,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
         layout.minimumInteritemSpacing = 5
         layout.minimumLineSpacing = layout.minimumInteritemSpacing
-        let cellsPerLine: CGFloat = 4
+        let cellsPerLine: CGFloat = 3
         let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
@@ -67,13 +67,13 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
                 for movie in movies {
-                    let action = movie["genre_ids"]! as! NSArray
-                    if action.contains(28) {
-                        //print(movie["title"])
+                    let genre = movie["genre_ids"]! as! NSArray
+                    if genre.contains(28) {
+                        self.movies.append(movie)
                     }
                 
                 }
-                self.movies = movies
+                //self.movies = movies
                 self.collectionView.reloadData()
                 //self.refreshControl.endRefreshing()
                // self.activity.stopAnimating()
@@ -83,14 +83,14 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         }
         task.resume()
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! UICollectionViewCell
+        if let indexPath = collectionView.indexPath(for: cell) {
+            let movie = movies[indexPath.row]
+            let detailViewController = segue.destination as! DetailsViewController
+            detailViewController.movie = movie
+        }
     }
-    */
 
 }
