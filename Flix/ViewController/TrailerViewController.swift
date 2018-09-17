@@ -13,7 +13,6 @@ class TrailerViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
     var videoID = ""
-    var baseURL = "https://www.youtube.com/watch?v="
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,11 +26,7 @@ class TrailerViewController: UIViewController {
     }
     
     func playVideo(of key: String) {
-        //let videoURL = URL(string: "https://www.youtube.com/watch?v=NpG8iaM0Sfs")
-        /*let webConfiguration = WKWebViewConfiguration()
-        webConfiguration.allowsInlineMediaPlayback = true
-        webConfiguration.mediaTypesRequiringUserActionForPlayback = []
-        */
+        
         if let videoURL:URL = URL(string: "https://www.youtube.com/watch?v=\(key)") {
             webView.load(URLRequest(url: videoURL))
         }
