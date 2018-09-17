@@ -130,19 +130,11 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         cell.titleLabel.text = title
         cell.overviewLabel.text = overview
         
-        let placeholderURL = URL(string: "https://httpbin.org/image/png")!
-        let placeholderImg = UIImage(named: "placeholder")
+        let placeholderImg = UIImage(named: "launch_image")!
         
         let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
             size: cell.moviePosterImage.frame.size,
             radius: 20.0
-        )
-        
-        cell.moviePosterImage.af_setImage(
-            withURL: placeholderURL,
-            placeholderImage: placeholderImg,
-            filter: filter,
-            imageTransition: .crossDissolve(0.2)
         )
         
         let posterPathString = movie["poster_path"] as! String
@@ -151,6 +143,13 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         let posterURL = URL(string: baseURLString + posterPathString)!
         
         cell.moviePosterImage.af_setImage(withURL: posterURL)
+        
+        cell.moviePosterImage.af_setImage(
+            withURL: posterURL,
+            placeholderImage: placeholderImg,
+            filter: filter,
+            imageTransition: .crossDissolve(0.2)
+        )
         
         return cell
     }
