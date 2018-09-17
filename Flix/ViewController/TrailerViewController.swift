@@ -7,13 +7,17 @@
 //
 
 import UIKit
+import WebKit
 
 class TrailerViewController: UIViewController {
 
+    @IBOutlet weak var webView: WKWebView!
+    @IBOutlet weak var videoPlayerView: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        playVideo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -21,7 +25,23 @@ class TrailerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
+    func playVideo() {
+        //let videoURL = URL(string: "https://www.youtube.com/watch?v=NpG8iaM0Sfs")
+        let webConfiguration = WKWebViewConfiguration()
+        webConfiguration.allowsInlineMediaPlayback = true
+        webConfiguration.mediaTypesRequiringUserActionForPlayback = []
+        
+        if let videoURL:URL = URL(string: "https://www.youtube.com/watch?v=NpG8iaM0Sfs") {
+            let request:URLRequest = URLRequest(url: videoURL)
+            webView.load(request)
+        }
+        
+    }
+    
+    @IBAction func goBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
