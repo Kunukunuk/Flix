@@ -8,14 +8,18 @@
 
 import UIKit
 
-class SuperheroViewController: UIViewController, UICollectionViewDataSource {
+class SuperheroViewController: UIViewController, UICollectionViewDataSource{
     
     @IBOutlet weak var collectionView: UICollectionView!
     var movies: [[String: Any]] = []
-    
+    var genreID = 28
+    var genreName = "Superhero"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        movies = []
+        self.navigationItem.title = "\(genreName) Movies"
         
         collectionView.dataSource = self
         
@@ -26,8 +30,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         let interItemSpacingTotal = layout.minimumInteritemSpacing * (cellsPerLine - 1)
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
-        
-        
         
         fetchMovies()
         // Do any additional setup after loading the view.
@@ -68,7 +70,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
                 let movies = dataDictionary["results"] as! [[String: Any]]
                 for movie in movies {
                     let genre = movie["genre_ids"]! as! NSArray
-                    if genre.contains(28) {
+                    if genre.contains(self.genreID) {
                         self.movies.append(movie)
                     }
                 
@@ -84,13 +86,20 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource {
         task.resume()
     }
     
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let cell = sender as! UICollectionViewCell
-        if let indexPath = collectionView.indexPath(for: cell) {
-            let movie = movies[indexPath.row]
-            let detailViewController = segue.destination as! DetailsViewController
-            detailViewController.movie = movie
-        }
+        
+        if (segue.identifier == "GoToDetails") {
+            let cell = sender as! UICollectionViewCell
+            if let indexPath = collectionView.indexPath(for: cell) {
+                let movie = movies[indexPath.row]
+                let detailViewController = segue.destination as! DetailsViewController
+                detailViewController.movie = movie
+            }
+        }// else if (segue.identifier == "PopUpModal") {
+        //}
+        
     }
-
+    
 }
+
