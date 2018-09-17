@@ -12,12 +12,13 @@ import WebKit
 class TrailerViewController: UIViewController {
 
     @IBOutlet weak var webView: WKWebView!
-    @IBOutlet weak var videoPlayerView: UIView!
+    var videoID = ""
+    var baseURL = "https://www.youtube.com/watch?v="
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        playVideo()
+        fetchMoviesTrailer(of: videoID)
     }
 
     override func didReceiveMemoryWarning() {
@@ -25,15 +26,14 @@ class TrailerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func playVideo() {
+    func playVideo(of key: String) {
         //let videoURL = URL(string: "https://www.youtube.com/watch?v=NpG8iaM0Sfs")
-        let webConfiguration = WKWebViewConfiguration()
+        /*let webConfiguration = WKWebViewConfiguration()
         webConfiguration.allowsInlineMediaPlayback = true
         webConfiguration.mediaTypesRequiringUserActionForPlayback = []
-        
-        if let videoURL:URL = URL(string: "https://www.youtube.com/watch?v=NpG8iaM0Sfs") {
-            let request:URLRequest = URLRequest(url: videoURL)
-            webView.load(request)
+        */
+        if let videoURL:URL = URL(string: "https://www.youtube.com/watch?v=\(key)") {
+            webView.load(URLRequest(url: videoURL))
         }
         
     }
@@ -42,14 +42,25 @@ class TrailerViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func fetchMoviesTrailer(of movieID: String) {
+        
+        let url = URL(string: "https://api.themoviedb.org/3/movie/\(movieID)/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // This will run when the network request returns
+            if let error = error {
+                //self.alert()
+                print(error.localizedDescription)
+            } else if let data = data {
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                let trailers = dataDictionary["results"] as! [[String: Any]]
+                let youtubeKey = trailers[0]["key"] as! String
+                self.playVideo(of: youtubeKey)
+                
+            }
+        }
+        task.resume()
     }
-    */
 
 }
