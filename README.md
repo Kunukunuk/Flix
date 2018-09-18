@@ -65,7 +65,7 @@ Describe any challenges encountered while building the app.
 
 **Flix** is a movies app displaying box office and top rental DVDs using [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **X** hours spent in total
+Time spent: **100011** hours spent in total
 
 ## User Stories
 
@@ -96,7 +96,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+![kun_huang_flix02](https://user-images.githubusercontent.com/28847045/45658637-2b6e4680-babe-11e8-9b28-b9578219fb05.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
