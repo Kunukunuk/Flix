@@ -284,7 +284,18 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="8J7-Zg-zKi"/>
                     </view>
-                    <navigationItem key="navigationItem" id="YTG-ve-6tA"/>
+                    <navigationItem key="navigationItem" id="YTG-ve-6tA">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="kDS-iS-hlt">
+                            <connections>
+                                <action selector="getTopRated:" destination="yBv-n7-qec" id="DVE-d3-l8W"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="Za5-aS-L1a">
+                            <connections>
+                                <segue destination="7TK-PU-Ns9" kind="show" identifier="FromTopRated" id="d7o-u4-BrY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="bhd-q7-Kw7" id="SBq-eg-XJq"/>
                     </connections>
@@ -358,9 +369,14 @@
                         <viewLayoutGuide key="safeArea" id="rDE-jS-m9P"/>
                     </view>
                     <navigationItem key="navigationItem" id="HZX-yk-i8C">
+                        <barButtonItem key="leftBarButtonItem" title="Reset" id="VGP-KL-XDM">
+                            <connections>
+                                <action selector="getlAllMovies:" destination="UJG-mP-18f" id="wWS-pA-avD"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Search" id="4Lv-82-AbX">
                             <connections>
-                                <segue destination="7TK-PU-Ns9" kind="show" id="c9D-5f-2u4"/>
+                                <segue destination="7TK-PU-Ns9" kind="show" identifier="FromSuper" id="c9D-5f-2u4"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -463,6 +479,7 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="d7o-u4-BrY"/>
         <segue reference="DVp-c0-eLD"/>
     </inferredMetricsTieBreakers>
 </document>

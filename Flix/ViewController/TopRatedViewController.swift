@@ -12,12 +12,15 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
 
     @IBOutlet weak var collectionView: UICollectionView!
     var movies: [[String: Any]] = []
+    var genreID = 0
+    var genreName = ""
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         movies = []
-        //self.navigationItem.title = "\(genreName) Movies"
+        self.navigationItem.title = "Top Rated \(genreName) Movies"
         
         collectionView.dataSource = self
         
@@ -29,7 +32,7 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
         
-        fetchMovies()
+        fetchMovies(search: isSearching)
         // Do any additional setup after loading the view.
     }
     
@@ -53,7 +56,7 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
         return cell
     }
     
-    func fetchMovies() {
+    func fetchMovies(search: Bool) {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/top_rated?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -66,8 +69,17 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
-                self.movies = movies
-                //self.movies = movies
+                if search {
+                    for movie in movies {
+                        let genre = movie["genre_ids"]! as! NSArray
+                        if genre.contains(self.genreID) {
+                            self.movies.append(movie)
+                        }
+                        
+                    }
+                } else {
+                    self.movies = movies
+                }
                 self.collectionView.reloadData()
                 
             }
@@ -75,6 +87,10 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
         task.resume()
     }
     
+    @IBAction func getTopRated(_ sender: UIBarButtonItem) {
+        isSearching = false
+        fetchMovies(search: isSearching)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -85,6 +101,9 @@ class TopRatedViewController: UIViewController, UICollectionViewDataSource {
                 let detailViewController = segue.destination as! DetailsViewController
                 detailViewController.movie = movie
             }
+        } else if (segue.identifier == "FromTopRated") {
+            let search = segue.destination as! GenrePickerViewController
+            search.from = false
         }
     }
 

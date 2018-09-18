@@ -12,7 +12,7 @@ class GenrePickerViewController: UIViewController, UIPickerViewDelegate, UIPicke
 
     @IBOutlet weak var genrePicker: UIPickerView!
     var superHero: SuperheroViewController?
-    
+    var from = false
     let pickerData:[(name: String, id: Int)] = [
                                         ("Action", 28),
                                         ("Adevnture", 12),
@@ -71,14 +71,22 @@ class GenrePickerViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBAction func setGenre(_ sender: UIButton) {
         
+        print(from)
         dismiss(animated: true, completion: nil)
     }
     
     func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
-        
-        (viewController as? SuperheroViewController)?.genreName = genreName
-        (viewController as? SuperheroViewController)?.genreID = genreID
-        (viewController as? SuperheroViewController)?.viewDidLoad()
+        if from {
+            (viewController as? SuperheroViewController)?.genreName = genreName
+            (viewController as? SuperheroViewController)?.genreID = genreID
+            (viewController as? SuperheroViewController)?.isSearching = true
+            (viewController as? SuperheroViewController)?.viewDidLoad()
+        } else {
+            (viewController as? TopRatedViewController)?.genreName = genreName
+            (viewController as? TopRatedViewController)?.genreID = genreID
+            (viewController as? TopRatedViewController)?.isSearching = true
+            (viewController as? TopRatedViewController)?.viewDidLoad()
+        }
         
     }
     

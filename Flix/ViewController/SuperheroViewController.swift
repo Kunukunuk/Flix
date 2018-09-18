@@ -14,6 +14,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
     var movies: [[String: Any]] = []
     var genreID = 28
     var genreName = "Superhero"
+    var isSearching = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +32,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
         let width = collectionView.frame.size.width / cellsPerLine - interItemSpacingTotal / cellsPerLine
         layout.itemSize = CGSize(width: width, height: width * 3 / 2)
         
-        fetchMovies()
+        fetchMovies(search: isSearching)
         // Do any additional setup after loading the view.
     }
 
@@ -55,7 +56,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
         return cell
     }
     
-    func fetchMovies() {
+    func fetchMovies(search: Bool) {
         
         let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
@@ -68,14 +69,17 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
-                for movie in movies {
-                    let genre = movie["genre_ids"]! as! NSArray
-                    if genre.contains(self.genreID) {
-                        self.movies.append(movie)
+                if search {
+                    for movie in movies {
+                        let genre = movie["genre_ids"]! as! NSArray
+                        if genre.contains(self.genreID) {
+                            self.movies.append(movie)
+                        }
+                    
                     }
-                
+                } else {
+                    self.movies = movies
                 }
-                //self.movies = movies
                 self.collectionView.reloadData()
                 //self.refreshControl.endRefreshing()
                // self.activity.stopAnimating()
@@ -86,6 +90,11 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
         task.resume()
     }
     
+    @IBAction func getlAllMovies(_ sender: UIBarButtonItem) {
+        isSearching = false
+        fetchMovies(search: isSearching)
+        
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -96,8 +105,10 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
                 let detailViewController = segue.destination as! DetailsViewController
                 detailViewController.movie = movie
             }
-        }// else if (segue.identifier == "PopUpModal") {
-        //}
+        } else if (segue.identifier == "FromSuper") {
+            let search = segue.destination as! GenrePickerViewController
+            search.from = true
+        }
         
     }
     
