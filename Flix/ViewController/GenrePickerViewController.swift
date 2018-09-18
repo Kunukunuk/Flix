@@ -71,7 +71,6 @@ class GenrePickerViewController: UIViewController, UIPickerViewDelegate, UIPicke
     
     @IBAction func setGenre(_ sender: UIButton) {
         
-        print(from)
         dismiss(animated: true, completion: nil)
     }
     
