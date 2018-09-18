@@ -81,6 +81,7 @@ The following **stretch** features are implemented:
 - [X] Customize the navigation bar (+1pt)
 - [ ] List in any optionals you didn't finish from last week (+1-3pts)
 - [X] User can search movies by movie genre
+- [X] User can get top rated movies
 
 The following **additional** features are implemented:
 
