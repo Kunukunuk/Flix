@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJv-Bw-khW">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="cJv-Bw-khW">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -23,9 +21,6 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1tS-bB-KOk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="1tS-bB-KOk" secondAttribute="height" multiplier="375:667" id="00c-bb-TtL"/>
-                                </constraints>
                                 <searchBar key="tableHeaderView" contentMode="redraw" placeholder="Search Movies by Title" id="RlH-cW-ygl">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -48,13 +43,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nYP-EO-iOQ">
-                                                    <rect key="frame" x="155" y="11" width="205" height="36"/>
+                                                    <rect key="frame" x="155" y="11" width="197" height="36"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Overview" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zht-5h-xyr">
-                                                    <rect key="frame" x="155" y="47" width="205" height="122"/>
+                                                    <rect key="frame" x="155" y="47" width="213" height="122"/>
                                                     <fontDescription key="fontDescription" type="system" weight="thin" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -66,13 +61,15 @@
                                                 <constraint firstItem="Zht-5h-xyr" firstAttribute="top" secondItem="nYP-EO-iOQ" secondAttribute="bottom" id="It3-L4-NFf"/>
                                                 <constraint firstItem="tlc-vZ-bgB" firstAttribute="bottom" secondItem="Jis-CB-uUr" secondAttribute="bottomMargin" id="MTO-SW-Udh"/>
                                                 <constraint firstItem="Zht-5h-xyr" firstAttribute="leading" secondItem="tlc-vZ-bgB" secondAttribute="trailing" constant="8" id="NLd-0Q-dOb"/>
-                                                <constraint firstItem="Zht-5h-xyr" firstAttribute="bottom" secondItem="Jis-CB-uUr" secondAttribute="bottomMargin" id="PaE-h7-bbR"/>
-                                                <constraint firstItem="Zht-5h-xyr" firstAttribute="trailing" secondItem="Jis-CB-uUr" secondAttribute="trailingMargin" id="Qgj-DZ-bza"/>
+                                                <constraint firstItem="Zht-5h-xyr" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Jis-CB-uUr" secondAttribute="bottomMargin" constant="8" id="PaE-h7-bbR"/>
+                                                <constraint firstItem="Zht-5h-xyr" firstAttribute="trailing" secondItem="Jis-CB-uUr" secondAttribute="trailingMargin" constant="8" id="Qgj-DZ-bza"/>
                                                 <constraint firstItem="nYP-EO-iOQ" firstAttribute="top" secondItem="Jis-CB-uUr" secondAttribute="topMargin" id="ToD-2v-Y1l"/>
+                                                <constraint firstItem="nYP-EO-iOQ" firstAttribute="top" secondItem="tlc-vZ-bgB" secondAttribute="top" id="fWp-Uu-oUC"/>
                                                 <constraint firstItem="Zht-5h-xyr" firstAttribute="top" secondItem="nYP-EO-iOQ" secondAttribute="bottom" id="fmc-l3-cJ6"/>
                                                 <constraint firstItem="nYP-EO-iOQ" firstAttribute="leading" secondItem="tlc-vZ-bgB" secondAttribute="trailing" constant="8" id="mcu-CH-8Fc"/>
                                                 <constraint firstItem="tlc-vZ-bgB" firstAttribute="top" secondItem="Jis-CB-uUr" secondAttribute="topMargin" id="oYj-k7-m6m"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="nYP-EO-iOQ" secondAttribute="trailing" id="zJ6-d6-DU3"/>
+                                                <constraint firstItem="Zht-5h-xyr" firstAttribute="leading" secondItem="nYP-EO-iOQ" secondAttribute="leading" id="rMT-PJ-dwq"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="nYP-EO-iOQ" secondAttribute="trailing" constant="8" id="zJ6-d6-DU3"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -182,7 +179,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2656.8000000000002" y="33.733133433283363"/>
+            <point key="canvasLocation" x="2817" y="34"/>
         </scene>
         <!--Trailer View Controller-->
         <scene sceneID="cH8-Ld-hsr">
@@ -386,7 +383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ac6-gd-gYW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="944.79999999999995" y="820.83958020989508"/>
+            <point key="canvasLocation" x="972" y="955"/>
         </scene>
         <!--Genre Picker View Controller-->
         <scene sceneID="4SK-ez-ren">
@@ -432,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bEi-0m-eGn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1960.8" y="820.83958020989508"/>
+            <point key="canvasLocation" x="1911" y="955"/>
         </scene>
         <!--Superhero-->
         <scene sceneID="za0-yY-XaP">
@@ -479,7 +476,7 @@
         <image name="superhero_tabbar_item" width="21" height="23"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="d7o-u4-BrY"/>
+        <segue reference="c9D-5f-2u4"/>
         <segue reference="G32-3n-YZj"/>
     </inferredMetricsTieBreakers>
 </document>
