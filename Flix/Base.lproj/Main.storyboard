@@ -118,25 +118,20 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cht-1h-dw1">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzY-ji-l5f">
-                                        <rect key="frame" x="0.0" y="0.0" width="368" height="290"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bzY-ji-l5f">
+                                        <rect key="frame" x="0.0" y="0.0" width="368" height="184.5"/>
                                     </imageView>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZkU-Mf-e5N">
-                                        <rect key="frame" x="36" y="196" width="123" height="187"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ZkU-Mf-e5N">
+                                        <rect key="frame" x="16" y="91" width="123" height="187"/>
                                         <gestureRecognizers/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="187" id="LQe-xm-WYa"/>
+                                            <constraint firstAttribute="width" constant="123" id="Y3i-GE-bRC"/>
+                                        </constraints>
                                         <connections>
                                             <outletCollection property="gestureRecognizers" destination="uG2-Tw-LqK" appends="YES" id="h3f-s7-C6t"/>
                                         </connections>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCO-df-0d3">
-                                        <rect key="frame" x="167" y="298" width="212" height="38"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ReleaseDate" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TMu-Yy-Mkb">
                                         <rect key="frame" x="167" y="344" width="212" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -151,7 +146,22 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCO-df-0d3">
+                                        <rect key="frame" x="147" y="192" width="212" height="38"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="ZkU-Mf-e5N" firstAttribute="centerY" secondItem="bzY-ji-l5f" secondAttribute="bottom" id="CxV-Zn-hpH"/>
+                                    <constraint firstItem="bzY-ji-l5f" firstAttribute="top" secondItem="cht-1h-dw1" secondAttribute="top" id="RPg-NP-FVx"/>
+                                    <constraint firstAttribute="trailing" secondItem="bzY-ji-l5f" secondAttribute="trailing" id="YaD-ox-nK5"/>
+                                    <constraint firstItem="bzY-ji-l5f" firstAttribute="height" secondItem="cht-1h-dw1" secondAttribute="height" multiplier="1:3" id="nGY-k0-dvS"/>
+                                    <constraint firstItem="ZkU-Mf-e5N" firstAttribute="leading" secondItem="cht-1h-dw1" secondAttribute="leading" constant="16" id="opz-OE-3UF"/>
+                                    <constraint firstItem="bzY-ji-l5f" firstAttribute="leading" secondItem="cht-1h-dw1" secondAttribute="leading" id="ygO-h3-oCc"/>
+                                </constraints>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
