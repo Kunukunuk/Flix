@@ -27,7 +27,7 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height+50)
+        scrollView.contentSize = CGSize(width: self.view.frame.width+100, height: self.view.frame.height+10)
         
         if let movie = movie {
             titleLabel.text = movie[MovieKey.title] as? String
