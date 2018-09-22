@@ -346,9 +346,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J7K-c4-JSr">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="J7K-c4-JSr">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="seb-xR-vfs">
                                     <size key="itemSize" width="125" height="222"/>
@@ -364,13 +363,18 @@
                                             <rect key="frame" x="0.0" y="0.0" width="125" height="222"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rb5-6f-atX">
-                                                    <rect key="frame" x="4" y="0.0" width="117" height="222"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
+                                                <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rb5-6f-atX">
+                                                    <rect key="frame" x="0.0" y="0.0" width="125" height="222"/>
                                                     <gestureRecognizers/>
                                                 </imageView>
                                             </subviews>
                                         </view>
+                                        <constraints>
+                                            <constraint firstItem="rb5-6f-atX" firstAttribute="top" secondItem="sZf-Vh-A08" secondAttribute="top" id="61f-hb-H4h"/>
+                                            <constraint firstItem="rb5-6f-atX" firstAttribute="leading" secondItem="sZf-Vh-A08" secondAttribute="leading" id="Sx3-Qh-Mvr"/>
+                                            <constraint firstAttribute="trailing" secondItem="rb5-6f-atX" secondAttribute="trailing" id="ly8-y1-OIL"/>
+                                            <constraint firstAttribute="bottom" secondItem="rb5-6f-atX" secondAttribute="bottom" id="yCG-Cq-r6p"/>
+                                        </constraints>
                                         <connections>
                                             <outlet property="posterImageView" destination="rb5-6f-atX" id="KqH-ww-Eky"/>
                                             <segue destination="6eT-mi-ibW" kind="show" identifier="GoToDetails" id="xRp-rf-tAM"/>
@@ -380,6 +384,12 @@
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="J7K-c4-JSr" firstAttribute="top" secondItem="rDE-jS-m9P" secondAttribute="top" id="Azm-6p-lgJ"/>
+                            <constraint firstItem="J7K-c4-JSr" firstAttribute="bottom" secondItem="rDE-jS-m9P" secondAttribute="bottom" id="PNB-jf-8a6"/>
+                            <constraint firstItem="J7K-c4-JSr" firstAttribute="trailing" secondItem="rDE-jS-m9P" secondAttribute="trailing" id="f33-Pb-vOr"/>
+                            <constraint firstItem="J7K-c4-JSr" firstAttribute="leading" secondItem="rDE-jS-m9P" secondAttribute="leading" id="fHS-mN-B0P"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="rDE-jS-m9P"/>
                     </view>
                     <navigationItem key="navigationItem" id="HZX-yk-i8C">
@@ -494,6 +504,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="c9D-5f-2u4"/>
-        <segue reference="G32-3n-YZj"/>
+        <segue reference="xRp-rf-tAM"/>
     </inferredMetricsTieBreakers>
 </document>
