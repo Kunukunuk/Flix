@@ -28,6 +28,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
+        //tableView.rowHeight = UITableViewAutomaticDimension
+        //tableView.estimatedRowHeight = 50
+        
         searchBar.delegate = self
 
         tableView.dataSource = self
@@ -65,6 +68,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         tableView.reloadData()
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
     
     func alert() {
         let alertController = UIAlertController(title: "Can not get the movies", message: "The internet connection appears to be offline", preferredStyle: .alert)
