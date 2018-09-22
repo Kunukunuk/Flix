@@ -28,8 +28,8 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         refreshControl.addTarget(self, action: #selector(NowPlayingViewController.didPullToRefresh(_:)), for: .valueChanged)
         tableView.insertSubview(refreshControl, at: 0)
         
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        //tableView.estimatedRowHeight = 50
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 50
         
         searchBar.delegate = self
 
@@ -66,10 +66,6 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         searchBar.resignFirstResponder()
         isSearching = false
         tableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
     }
     
     func alert() {
