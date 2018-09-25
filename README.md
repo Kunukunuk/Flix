@@ -152,7 +152,7 @@ Please list two areas of the assignment you'd like to **discuss further with you
 
 Here's a walkthrough of implemented user stories:
 
-[kun_huang_flixlab](https://user-images.githubusercontent.com/28847045/45989511-08a5da00-c04a-11e8-8fa7-f9e2363e1dc2.gif)
+![kun_huang_flixlab](https://user-images.githubusercontent.com/28847045/45989511-08a5da00-c04a-11e8-8fa7-f9e2363e1dc2.gif)
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
