@@ -13,6 +13,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
 
     @IBOutlet weak var tableView: UITableView!
     var movies: [[String: Any]] = []
+    var allMovies: [Movie] = []
     var filteredData: [[String: Any]] = []
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var activity: UIActivityIndicatorView!
@@ -89,6 +90,13 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
             } else if let data = data {
                 let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
                 let movies = dataDictionary["results"] as! [[String: Any]]
+                
+                self.allMovies = []
+                for dictionary in movies {
+                    let movie = Movie(dictionary: dictionary)
+                    print("movie dict: \(dictionary)")
+                    self.allMovies.append(movie)
+                }
                 self.movies = movies
                 self.tableView.reloadData()
                 self.refreshControl.endRefreshing()
