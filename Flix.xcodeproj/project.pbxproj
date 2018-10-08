@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D041089216BFD4100B2165D /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D041088216BFD4100B2165D /* Movie.swift */; };
 		0D148268213F1D6D008C8044 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D148267213F1D6D008C8044 /* AppDelegate.swift */; };
 		0D14826D213F1D6D008C8044 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D14826B213F1D6D008C8044 /* Main.storyboard */; };
 		0D14826F213F1D6F008C8044 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D14826E213F1D6F008C8044 /* Assets.xcassets */; };
@@ -45,6 +46,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0D041088216BFD4100B2165D /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		0D148264213F1D6D008C8044 /* Flix.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Flix.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D148267213F1D6D008C8044 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0D14826C213F1D6D008C8044 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 				0D14826E213F1D6F008C8044 /* Assets.xcassets */,
 				0D148270213F1D6F008C8044 /* LaunchScreen.storyboard */,
 				0D148273213F1D6F008C8044 /* Info.plist */,
+				0D041088216BFD4100B2165D /* Movie.swift */,
 			);
 			path = Flix;
 			sourceTree = "<group>";
@@ -426,6 +429,7 @@
 				0D14829E21408B53008C8044 /* MovieCell.swift in Sources */,
 				0DF0644E2148A0DE00757D94 /* DetailsViewController.swift in Sources */,
 				0D4BDCC621507BF5003E1A9E /* TopRatedCell.swift in Sources */,
+				0D041089216BFD4100B2165D /* Movie.swift in Sources */,
 				0D4BDCC421507786003E1A9E /* TopRatedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
