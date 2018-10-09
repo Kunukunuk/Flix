@@ -12,4 +12,11 @@ class TopRatedCell: UICollectionViewCell {
     
     @IBOutlet weak var topRatedImage: UIImageView!
     
+    var movie: Movie! {
+        didSet {
+            if movie.posterUrl != nil {
+                topRatedImage.af_setImage(withURL: movie.posterUrl!)
+            }
+        }
+    }
 }

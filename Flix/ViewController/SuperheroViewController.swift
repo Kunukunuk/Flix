@@ -59,37 +59,6 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
                 self.collectionView.reloadData()
             }
         }
-        /*
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                //self.alert()
-                print(error.localizedDescription)
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let movies = dataDictionary["results"] as! [[String: Any]]
-                if search {
-                    for movie in movies {
-                        let genre = movie["genre_ids"]! as! NSArray
-                        if genre.contains(self.genreID) {
-                            self.movies.append(movie)
-                        }
-                    
-                    }
-                } else {
-                    self.movies = movies
-                }
-                self.collectionView.reloadData()
-                //self.refreshControl.endRefreshing()
-               // self.activity.stopAnimating()
-                //self.filteredData = self.movies
-                
-            }
-        }
-        task.resume()*/
     }
     
     @IBAction func getlAllMovies(_ sender: UIBarButtonItem) {
