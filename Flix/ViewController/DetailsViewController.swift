@@ -41,8 +41,7 @@ class DetailsViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let trailer = segue.destination as! TrailerViewController
-        //let idNumber = movie!["id"] as! NSNumber
-        //trailer.videoID = "\(idNumber)"
+        trailer.videoID = "\((movie?.id)!)"
         
     }
     

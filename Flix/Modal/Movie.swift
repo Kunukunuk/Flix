@@ -14,7 +14,7 @@ class Movie {
     var overview: String
     var backdropURL: URL?
     var releaseDate: String
-    var id: String
+    var id: Int
     
     init(dictionary: [String: Any]) {
         print("dictiuonary: \(dictionary)")
@@ -25,7 +25,7 @@ class Movie {
         let backdropPath = dictionary["backdrop_path"] as! String
         backdropURL = URL(string: "https://image.tmdb.org/t/p/w500" + backdropPath)
         releaseDate = dictionary["release_date"] as? String ?? "No release date"
-        id = dictionary["id"] as? String ?? "No id"
+        id = dictionary["id"] as? Int ?? 0
     }
     
     class func movies(dictionaries: [[String: Any]]) -> [Movie] {
