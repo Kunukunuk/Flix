@@ -180,20 +180,22 @@ Describe any challenges encountered while building the app.
 
 **Flix** is a movies app displaying box office and top rental DVDs using [The Movie Database API](http://docs.themoviedb.apiary.io/#).
 
-Time spent: **Pending** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
 The following **required** user stories are complete:
 
-- [ ] Create a movie model (+2pt)
-- [ ] Implement the movie model (+2pt)
-- [ ] Implement property observers (+2pt)
-- [ ] Create a basic API Client (+2pt)
+- [X] Create a movie model (+2pt)
+- [X] Implement the movie model (+2pt)
+- [X] Implement property observers (+2pt)
+- [X] Create a basic API Client (+2pt)
 
 The following **additional** user stories are implemented:
 
 - [ ] List anything else that you can get done to improve the app functionality! (+1-3pts)
+- [X] API Client with genre searches
+- [X] Top rated movie in API Client
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
