@@ -12,9 +12,9 @@ import AlamofireImage
 class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, UITableViewDelegate {
 
     @IBOutlet weak var tableView: UITableView!
-    var movies: [[String: Any]] = []
+    //var movies: [[String: Any]] = []
     var allMovies: [Movie] = []
-    var filteredData: [[String: Any]] = []
+    var filteredData: [Movie] = []
     var refreshControl: UIRefreshControl!
     @IBOutlet weak var activity: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -49,9 +49,9 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
             tableView.reloadData()
         } else {
             isSearching = true
-            filteredData = movies.filter {
+            /*(filteredData = movies.filter {
                  ($0["title"] as! String).lowercased().contains(searchText.lowercased())
-            }
+            }*/
             
             tableView.reloadData()
         }
@@ -79,48 +79,29 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     
     func fetchMovies() {
         
-        let url = URL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed")!
-        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: OperationQueue.main)
-        let task = session.dataTask(with: request) { (data, response, error) in
-            // This will run when the network request returns
-            if let error = error {
-                self.alert()
-                print(error.localizedDescription)
-            } else if let data = data {
-                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
-                let movies = dataDictionary["results"] as! [[String: Any]]
-                
-                self.allMovies = []
-                for dictionary in movies {
-                    let movie = Movie(dictionary: dictionary)
-                    print("movie dict: \(dictionary)")
-                    self.allMovies.append(movie)
-                }
-                self.movies = movies
+        MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
+            if let movies = movies {
+                self.allMovies = movies
                 self.tableView.reloadData()
-                self.refreshControl.endRefreshing()
-                self.activity.stopAnimating()
-                self.filteredData = self.movies
-                
             }
+            self.refreshControl.endRefreshing()
+            self.activity.stopAnimating()
         }
-        task.resume()
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (isSearching) {
             return filteredData.count
         }
-        return movies.count
+        return allMovies.count
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let cell = sender as! UITableViewCell
         if let indexPath = tableView.indexPath(for: cell) {
-            let movie = movies[indexPath.row]
+            let movie = allMovies[indexPath.row]
             let detailViewController = segue.destination as! DetailsViewController
-            detailViewController.movie = movie
+            //detailViewController.movie = movie
         }
     }
     
@@ -128,38 +109,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
         
-        let movie: [String: Any]
-        if isSearching {
-            movie = filteredData[indexPath.row]
-        } else {
-            movie = movies[indexPath.row]
-        }
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        
-        let placeholderImg = UIImage(named: "launch_image")!
-        
-        let filter = AspectScaledToFillSizeWithRoundedCornersFilter(
-            size: cell.moviePosterImage.frame.size,
-            radius: 20.0
-        )
-        
-        let posterPathString = movie["poster_path"] as! String
-        let baseURLString = "https://image.tmdb.org/t/p/w500"
-        
-        let posterURL = URL(string: baseURLString + posterPathString)!
-        
-        cell.moviePosterImage.af_setImage(withURL: posterURL)
-        
-        cell.moviePosterImage.af_setImage(
-            withURL: posterURL,
-            placeholderImage: placeholderImg,
-            filter: filter,
-            imageTransition: .crossDissolve(0.2)
-        )
+        cell.movie = allMovies[indexPath.row]
         
         return cell
     }

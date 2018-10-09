@@ -19,6 +19,7 @@ class MovieApiManager {
     }
     
     func nowPlayingMovies(completion: @escaping ([Movie]?, Error?) -> ()) {
+        
         let url = URL(string: MovieApiManager.baseUrl + "now_playing?api_key=\(MovieApiManager.apiKey)")!
         let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
         let task = session.dataTask(with: request) { (data, response, error) in
