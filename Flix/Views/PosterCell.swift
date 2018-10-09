@@ -7,8 +7,17 @@
 //
 
 import UIKit
+import Alamofire
 
 class PosterCell: UICollectionViewCell {
     
     @IBOutlet weak var posterImageView: UIImageView!
+    
+    var movie: Movie! {
+        didSet {
+            if movie.posterUrl != nil {
+                posterImageView.af_setImage(withURL: movie.posterUrl!)
+            }
+        }
+    }
 }

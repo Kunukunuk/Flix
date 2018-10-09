@@ -37,4 +37,35 @@ class MovieApiManager {
         task.resume()
     }
     
+    func nowPlayingGenreMovies(search: Bool, genreId: Int, completion: @escaping ([Movie]?, Error?) -> ()) {
+        
+        let url = URL(string: MovieApiManager.baseUrl + "now_playing?api_key=\(MovieApiManager.apiKey)")!
+        let request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData, timeoutInterval: 10)
+        let task = session.dataTask(with: request) { (data, response, error) in
+            // This will run when the network request returns
+            if let data = data {
+                let dataDictionary = try! JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+                let movieDictionaries = dataDictionary["results"] as! [[String: Any]]
+                
+                var movieArray: [[String: Any]] = []
+                if search {
+                    for movie in movieDictionaries {
+                        let genre = movie["genre_ids"]! as! NSArray
+                        if genre.contains(genreId) {
+                            movieArray.append(movie)
+                        }
+                        
+                    }
+                } else {
+                    movieArray = movieDictionaries
+                }
+                let movies = Movie.movies(dictionaries: movieArray)
+                completion(movies, nil)
+            } else {
+                completion(nil, error)
+            }
+        }
+        task.resume()
+    }
+    
 }
