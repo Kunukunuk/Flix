@@ -101,7 +101,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         if let indexPath = tableView.indexPath(for: cell) {
             let movie = allMovies[indexPath.row]
             let detailViewController = segue.destination as! DetailsViewController
-            //detailViewController.movie = movie
+            detailViewController.movie = movie
         }
     }
     

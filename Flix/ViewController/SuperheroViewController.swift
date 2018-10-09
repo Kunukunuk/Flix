@@ -103,7 +103,7 @@ class SuperheroViewController: UIViewController, UICollectionViewDataSource{
             if let indexPath = collectionView.indexPath(for: cell) {
                 let movie = movies[indexPath.row]
                 let detailViewController = segue.destination as! DetailsViewController
-                detailViewController.movie = movie
+                //detailViewController.movie = movie
             }
         } else if (segue.identifier == "FromSuper") {
             let search = segue.destination as! GenrePickerViewController
