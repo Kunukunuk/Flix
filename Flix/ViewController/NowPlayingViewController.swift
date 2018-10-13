@@ -46,12 +46,13 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "" {
             isSearching = false
+            filteredData = allMovies
             tableView.reloadData()
         } else {
             isSearching = true
-            /*(filteredData = movies.filter {
-                 ($0["title"] as! String).lowercased().contains(searchText.lowercased())
-            }*/
+            filteredData = allMovies.filter {
+                 ($0.title).lowercased().contains(searchText.lowercased())
+                }
             
             tableView.reloadData()
         }
@@ -82,6 +83,7 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
         MovieApiManager().nowPlayingMovies { (movies: [Movie]?, error: Error?) in
             if let movies = movies {
                 self.allMovies = movies
+                self.filteredData = self.allMovies
                 self.tableView.reloadData()
             }
             self.refreshControl.endRefreshing()
@@ -108,8 +110,11 @@ class NowPlayingViewController: UIViewController, UITableViewDataSource, UISearc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "MovieCell", for: indexPath) as! MovieCell
-        
-        cell.movie = allMovies[indexPath.row]
+        if isSearching {
+            cell.movie = filteredData[indexPath.row]
+        } else {
+            cell.movie = allMovies[indexPath.row]
+        }
         
         return cell
     }
