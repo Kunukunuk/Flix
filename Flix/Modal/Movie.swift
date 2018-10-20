@@ -22,8 +22,12 @@ class Movie {
         overview = dictionary["overview"] as? String ?? "No overview"
         let posterPath = dictionary["poster_path"] as! String
         posterUrl = URL(string: "https://image.tmdb.org/t/p/w500" + posterPath)
-        let backdropPath = dictionary["backdrop_path"] as! String
-        backdropURL = URL(string: "https://image.tmdb.org/t/p/w500" + backdropPath)
+        if dictionary["backdrop_path"] as? String != nil {
+            let backdropPath = dictionary["backdrop_path"] as! String
+            backdropURL = URL(string: "https://image.tmdb.org/t/p/w500" + backdropPath)
+        } else {
+            backdropURL = URL(string: "")
+        }
         releaseDate = dictionary["release_date"] as? String ?? "No release date"
         id = dictionary["id"] as? Int ?? 0
     }
